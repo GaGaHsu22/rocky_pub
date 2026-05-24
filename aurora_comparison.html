@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>極光行程總覽</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: #F9FAFB; color: #111827; padding: 1rem; }
+  .container { max-width: 900px; margin: 0 auto; }
+
+  h1 { font-size: 20px; font-weight: 700; color: #111827; margin-bottom: 4px; }
+  .subtitle { font-size: 13px; color: #6B7280; margin-bottom: 1.25rem; }
+
+  /* Region Tabs */
+  .region-tabs { display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap; }
+  .region-btn {
+    padding: 6px 18px; border-radius: 999px; border: 1.5px solid #E5E7EB;
+    background: #fff; color: #374151; font-weight: 400; cursor: pointer;
+    font-size: 14px; transition: all 0.15s;
+  }
+  .region-btn.active { background: #4F46E5; border-color: #4F46E5; color: #fff; font-weight: 600; }
+
+  /* Budget bar */
+  .budget-bar {
+    background: #fff; border: 1px solid #E5E7EB; border-radius: 10px;
+    padding: 12px 16px; margin-bottom: 1rem;
+  }
+  .budget-label { font-size: 12px; color: #6B7280; font-weight: 500; margin-bottom: 8px; }
+  .budget-items { display: flex; flex-wrap: wrap; gap: 10px 20px; }
+  .budget-item { display: flex; align-items: center; gap: 6px; }
+  .budget-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .budget-agency { font-size: 13px; font-weight: 500; }
+  .budget-range { font-size: 13px; color: #374151; }
+
+  /* Filters */
+  .filters { display: flex; gap: 12px; margin-bottom: 1rem; flex-wrap: wrap; align-items: center; }
+  .filter-group { display: flex; gap: 6px; flex-wrap: wrap; }
+  .filter-btn {
+    padding: 4px 12px; border-radius: 999px; font-size: 12px; cursor: pointer;
+    border: 1.5px solid #E5E7EB; background: #fff; color: #6B7280;
+    font-weight: 400; transition: all 0.15s;
+  }
+  .sort-group { margin-left: auto; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .sort-label { font-size: 12px; color: #6B7280; }
+  .sort-btn {
+    padding: 4px 10px; border-radius: 6px; font-size: 12px; cursor: pointer;
+    border: 1px solid #E5E7EB; background: #fff; color: #6B7280;
+    font-weight: 400; transition: all 0.15s;
+  }
+  .sort-btn.active { background: #EEF6FF; border-color: #4F46E5; color: #4F46E5; font-weight: 600; }
+
+  /* Cards */
+  .cards { display: flex; flex-direction: column; gap: 10px; }
+  .card {
+    background: #fff; border-radius: 12px; padding: 14px 16px;
+    border: 1.5px solid #E5E7EB; border-left-width: 5px;
+  }
+  .card-inner { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+  .card-left { flex: 1; min-width: 0; }
+  .card-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
+  .agency-badge {
+    border-radius: 999px; font-size: 11px; padding: 2px 9px;
+    font-weight: 600; border: 1px solid; flex-shrink: 0;
+  }
+  .card-days { font-size: 13px; color: #6B7280; }
+  .card-season { font-size: 13px; color: #6B7280; }
+  .card-name { font-size: 15px; font-weight: 600; color: #111827; margin-bottom: 6px; }
+  .card-highlight { font-size: 13px; color: #4B5563; margin-bottom: 8px; }
+  .card-stars { display: flex; gap: 20px; }
+  .star-group { }
+  .star-group-label { font-size: 11px; color: #9CA3AF; margin-bottom: 2px; }
+  .stars { font-size: 13px; }
+  .star-fill-amber { color: #F59E0B; }
+  .star-fill-indigo { color: #6366F1; }
+  .star-empty { color: #D1D5DB; }
+
+  .card-right { text-align: right; flex-shrink: 0; }
+  .price-label { font-size: 11px; color: #9CA3AF; }
+  .price-main { font-size: 16px; font-weight: 700; color: #111827; }
+  .price-max { font-size: 12px; color: #6B7280; }
+  .price-2p { font-size: 12px; color: #9CA3AF; margin-top: 2px; }
+  .price-bar-wrap { position: relative; height: 8px; background: #F3F4F6; border-radius: 4px; margin-top: 4px; width: 120px; }
+  .price-bar-fill { position: absolute; height: 100%; background: #6366F1; border-radius: 4px; min-width: 6px; }
+
+  .empty { text-align: center; color: #9CA3AF; padding: 2rem; font-size: 14px; }
+  .footnote { font-size: 12px; color: #9CA3AF; margin-top: 1rem; text-align: center; }
+
+  @media (max-width: 600px) {
+    .card-inner { flex-direction: column; }
+    .card-right { text-align: left; }
+    .price-bar-wrap { width: 100%; }
+    .sort-group { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🌌 極光行程總覽</h1>
+  <p class="subtitle">晴天・加利利・可樂・雄獅｜舒適安心看極光</p>
+
+  <div class="region-tabs" id="regionTabs"></div>
+  <div class="budget-bar">
+    <div class="budget-label">💰 兩人總費用估算（含機票）</div>
+    <div class="budget-items" id="budgetItems"></div>
+  </div>
+  <div class="filters">
+    <div class="filter-group" id="filterGroup"></div>
+    <div class="sort-group">
+      <span class="sort-label">排序：</span>
+      <div id="sortGroup"></div>
+    </div>
+  </div>
+  <div class="cards" id="cards"></div>
+  <div class="footnote">價格為每人起價含機票，實際依出發日期與人數調整。加利利 2026 冬季班已截止，需等 2027 年班次。</div>
+</div>
+
+<script>
+const data = {
+  冰島: [
+    { agency:"晴天", name:"冬季冰島－極光女神×斯奈山半島", days:12, priceMin:269000, priceMax:285000, highlight:"深度南冰島7晚、雙溫泉、教堂山、藍冰洞、冰川健行", season:"10～3月每週出發", comfort:5, aurora:5 },
+    { agency:"晴天", name:"晴元行旅 冰島圓夢計劃十章（輕奢款）", days:10, priceMin:185000, priceMax:192000, highlight:"南冰島7晚、斯奈山半島、金環、冰河湖", season:"10～3月", comfort:4, aurora:4 },
+    { agency:"加利利", name:"冰島壯闊金環 10 日", days:10, priceMin:229900, priceMax:229900, highlight:"斯奈山半島、天空之湖溫泉、金環之旅", season:"冬季", comfort:5, aurora:4 },
+    { agency:"可樂", name:"冰島幸福極光", days:9, priceMin:97900, priceMax:178900, highlight:"藍湖溫泉、冰川健行、金環、極光船、接城市遊", season:"10月～3月多場次", comfort:3, aurora:4 },
+    { agency:"雄獅", name:"繽紛北歐冰島魔幻冰洞旗艦", days:14, priceMin:175900, priceMax:220000, highlight:"冰島+芬蘭拉普蘭，冰洞健行、極地秘境", season:"冬季", comfort:4, aurora:4 },
+    { agency:"雄獅", name:"玩樂369星空璀璨北歐夢幻極光", days:12, priceMin:159900, priceMax:190000, highlight:"冰島+芬蘭，夜宿玻璃屋、極光列車", season:"冬季", comfort:3, aurora:4 },
+  ],
+  芬蘭: [
+    { agency:"晴天", name:"冬季北歐－破冰船、極光屋、馴鹿雪橇", days:10, priceMin:275000, priceMax:285000, highlight:"5晚極光屋（多種類型）、破冰船", season:"12月～3月每週", comfort:5, aurora:5 },
+    { agency:"晴天", name:"冬季北歐+倫敦－慢遊極圈英倫記行", days:12, priceMin:289000, priceMax:295000, highlight:"拉普蘭7～8晚＋倫敦連泊、2晚極光屋", season:"12月～3月", comfort:5, aurora:5 },
+    { agency:"晴天", name:"晴元行旅 北歐冬日詩篇（輕奢款）", days:10, priceMin:223900, priceMax:232900, highlight:"枕星玻璃屋或極光聚落極光屋 2 晚", season:"12月～3月", comfort:4, aurora:4 },
+    { agency:"加利利", name:"北歐極光星穹夢旅 11 日【臻選】", days:11, priceMin:308900, priceMax:308900, highlight:"追光6天5夜、極光景觀屋連泊、破冰船、聖誕老人村", season:"2027/1～2月", comfort:5, aurora:5 },
+    { agency:"加利利", name:"北歐極光星河璀璨 12 日【臻選】", days:12, priceMin:289900, priceMax:289900, highlight:"追光6天5夜、極光景觀屋連泊、帝王蟹、馴鹿雪橇", season:"2027/1～3月", comfort:5, aurora:5 },
+    { agency:"可樂", name:"芬蘭幸福極光 9 日", days:9, priceMin:125900, priceMax:145000, highlight:"極光玻璃屋、帝王蟹雪橇、聖誕老人村", season:"12月起多場次", comfort:3, aurora:4 },
+    { agency:"可樂", name:"芬蘭幸福極光 11 日（破冰船版）", days:11, priceMin:178900, priceMax:220900, highlight:"玻璃屋、帝王蟹、破冰船龍蝦裝、夜臥火車", season:"1～3月", comfort:3, aurora:4 },
+    { agency:"雄獅", name:"玩樂369芬蘭挪威極光 10 日", days:10, priceMin:159900, priceMax:185000, highlight:"帝王蟹、夜臥火車、玻璃屋", season:"冬季", comfort:3, aurora:4 },
+  ],
+  挪威: [
+    { agency:"晴天", name:"冬季挪威－仙境羅弗敦、絕色北極圈", days:12, priceMin:275000, priceMax:279000, highlight:"北極圈8天7夜、羅弗敦群島＋特羅姆瑟", season:"10月～3月", comfort:5, aurora:5 },
+    { agency:"加利利", name:"挪威羅浮敦極光星耀 10 日", days:10, priceMin:233900, priceMax:233900, highlight:"追光5天4夜、奢雅木屋、極光遊船、海鷹狩獵", season:"2027/2～3月", comfort:5, aurora:5 },
+    { agency:"可樂", name:"挪威幸福極光（羅浮敦系列）", days:11, priceMin:149900, priceMax:178000, highlight:"羅浮敦島入住、特羅姆瑟追光", season:"冬季場次", comfort:3, aurora:4 },
+  ],
+};
+
+const agencyColors = {
+  晴天:  { bg:"#EEF6FF", border:"#3B82F6", text:"#1D4ED8", dot:"#3B82F6" },
+  加利利:{ bg:"#F0FDF4", border:"#22C55E", text:"#15803D", dot:"#22C55E" },
+  可樂:  { bg:"#FFF7ED", border:"#F97316", text:"#C2410C", dot:"#F97316" },
+  雄獅:  { bg:"#FDF4FF", border:"#A855F7", text:"#7E22CE", dot:"#A855F7" },
+};
+
+const regionIcons = { 冰島:"🧊", 芬蘭:"🌲", 挪威:"🏔️" };
+const regions = ["冰島","芬蘭","挪威"];
+const agencies = ["全部","晴天","加利利","可樂","雄獅"];
+const sortOptions = [["price","價格↑"],["aurora","極光★"],["comfort","舒適★"],["days","天數↑"]];
+
+let activeRegion = "冰島";
+let filterAgency = "全部";
+let sortBy = "price";
+
+const globalMax = Math.max(...Object.values(data).flat().map(d => d.priceMax));
+
+function stars(count, type) {
+  let html = '';
+  for (let i = 0; i < 5; i++) {
+    html += `<span class="${i < count ? (type==='amber'?'star-fill-amber':'star-fill-indigo') : 'star-empty'}">★</span>`;
+  }
+  return `<span class="stars">${html}</span>`;
+}
+
+function render() {
+  // Region tabs
+  document.getElementById('regionTabs').innerHTML = regions.map(r =>
+    `<button class="region-btn${r===activeRegion?' active':''}" onclick="setRegion('${r}')">${regionIcons[r]} ${r}</button>`
+  ).join('');
+
+  // Budget
+  const budgetItems = agencies.filter(a => a !== '全部').map(a => {
+    const items = data[activeRegion].filter(d => d.agency === a);
+    if (!items.length) return '';
+    const min2 = Math.min(...items.map(d => d.priceMin)) * 2;
+    const max2 = Math.max(...items.map(d => d.priceMax)) * 2;
+    const c = agencyColors[a];
+    return `<div class="budget-item">
+      <span class="budget-dot" style="background:${c.dot}"></span>
+      <span class="budget-agency" style="color:${c.text}">${a}</span>
+      <span class="budget-range">NT$${(min2/10000).toFixed(1)}～${(max2/10000).toFixed(1)} 萬</span>
+    </div>`;
+  }).join('');
+  document.getElementById('budgetItems').innerHTML = budgetItems;
+
+  // Filter buttons
+  document.getElementById('filterGroup').innerHTML = agencies.map(a => {
+    const c = agencyColors[a];
+    const isActive = a === filterAgency;
+    const style = isActive && c
+      ? `border-color:${c.dot};background:${c.bg};color:${c.text};font-weight:600`
+      : isActive
+      ? `border-color:#4F46E5;background:#EEF6FF;color:#4F46E5;font-weight:600`
+      : '';
+    return `<button class="filter-btn" style="${style}" onclick="setFilter('${a}')">${a}</button>`;
+  }).join('');
+
+  // Sort buttons
+  document.getElementById('sortGroup').innerHTML = sortOptions.map(([key, label]) =>
+    `<button class="sort-btn${sortBy===key?' active':''}" onclick="setSort('${key}')">${label}</button>`
+  ).join('');
+
+  // Cards
+  let rows = [...data[activeRegion]];
+  if (filterAgency !== '全部') rows = rows.filter(r => r.agency === filterAgency);
+  if (sortBy === 'price') rows.sort((a,b) => a.priceMin - b.priceMin);
+  if (sortBy === 'aurora') rows.sort((a,b) => b.aurora - a.aurora);
+  if (sortBy === 'days') rows.sort((a,b) => a.days - b.days);
+  if (sortBy === 'comfort') rows.sort((a,b) => b.comfort - a.comfort);
+
+  if (rows.length === 0) {
+    document.getElementById('cards').innerHTML = '<div class="empty">此條件下無行程，請調整篩選條件</div>';
+    return;
+  }
+
+  document.getElementById('cards').innerHTML = rows.map(item => {
+    const c = agencyColors[item.agency];
+    const barLeft = (item.priceMin / globalMax * 100).toFixed(1);
+    const barWidth = Math.max(((item.priceMax - item.priceMin) / globalMax * 100), 2).toFixed(1);
+    return `
+    <div class="card" style="border-color:${c.border};border-left-color:${c.border}">
+      <div class="card-inner">
+        <div class="card-left">
+          <div class="card-meta">
+            <span class="agency-badge" style="background:${c.bg};color:${c.text};border-color:${c.border}">${item.agency}</span>
+            <span class="card-days">📅 ${item.days} 天</span>
+            <span class="card-season">🗓 ${item.season}</span>
+          </div>
+          <div class="card-name">${item.name}</div>
+          <div class="card-highlight">✦ ${item.highlight}</div>
+          <div class="card-stars">
+            <div class="star-group">
+              <div class="star-group-label">極光機率</div>
+              ${stars(item.aurora, 'amber')}
+            </div>
+            <div class="star-group">
+              <div class="star-group-label">舒適度</div>
+              ${stars(item.comfort, 'indigo')}
+            </div>
+          </div>
+        </div>
+        <div class="card-right">
+          <div class="price-label">每人費用</div>
+          <div class="price-main">NT$${(item.priceMin/10000).toFixed(1)}萬</div>
+          ${item.priceMax !== item.priceMin ? `<div class="price-max">～${(item.priceMax/10000).toFixed(1)}萬</div>` : ''}
+          <div class="price-2p">2人 約 NT$${(item.priceMin*2/10000).toFixed(0)}～${(item.priceMax*2/10000).toFixed(0)} 萬</div>
+          <div class="price-bar-wrap">
+            <div class="price-bar-fill" style="left:${barLeft}%;width:${barWidth}%"></div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function setRegion(r) { activeRegion = r; render(); }
+function setFilter(a) { filterAgency = a; render(); }
+function setSort(s) { sortBy = s; render(); }
+
+render();
+</script>
+</body>
+</html>
