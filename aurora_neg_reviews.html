@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北歐極光跟團差評總整理</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a2e;
+    --paper: #f5f0e8;
+    --paper-dark: #ede7d8;
+    --accent-ice: #5b8fa8;
+    --accent-fin: #4a7c59;
+    --accent-nor: #8b5a3c;
+    --accent-gen: #8a6a3c;
+    --warn: #c0392b;
+    --warn-light: #fdf0ee;
+    --caution: #d4820a;
+    --caution-light: #fef8ed;
+    --ok: #2d6a4f;
+    --ok-light: #edf7f2;
+    --serif: 'Noto Serif TC', serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 80% 0%, rgba(91,143,168,0.25) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 100%, rgba(74,124,89,0.2) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .header-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .header-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: rgba(245,240,232,0.5);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .header h1 {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .header-sub {
+    font-size: 0.875rem;
+    color: rgba(245,240,232,0.6);
+    font-weight: 400;
+  }
+
+  /* ── TABS ── */
+  .tabs-wrap {
+    background: var(--ink);
+    border-bottom: 1px solid rgba(245,240,232,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .tabs {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+    padding: 0 2rem;
+  }
+  .tab-btn {
+    background: none;
+    border: none;
+    color: rgba(245,240,232,0.45);
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    padding: 1rem 1.5rem 0.9rem;
+    cursor: pointer;
+    border-bottom: 2.5px solid transparent;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: rgba(245,240,232,0.8); }
+  .tab-btn.active {
+    color: var(--paper);
+    border-bottom-color: currentColor;
+  }
+  .tab-btn.active.ice { color: #7dbcd4; border-bottom-color: #7dbcd4; }
+  .tab-btn.active.fin { color: #7bba91; border-bottom-color: #7bba91; }
+  .tab-btn.active.nor { color: #d4956a; border-bottom-color: #d4956a; }
+  .tab-btn.active.gen { color: #d4b06a; border-bottom-color: #d4b06a; }
+  .tab-icon { font-size: 1.1rem; }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 5rem;
+  }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── SECTION HEADER ── */
+  .section-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--paper-dark);
+  }
+  .section-emoji {
+    font-size: 2.75rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .section-head h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+  .section-head p {
+    font-size: 0.875rem;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  /* ── VERDICT BAR ── */
+  .verdict {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--paper-dark);
+    border-radius: 6px;
+    padding: 0.875rem 1.25rem;
+    margin-bottom: 2rem;
+    font-size: 0.875rem;
+  }
+  .verdict-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #888;
+    flex-shrink: 0;
+  }
+  .verdict-text { color: var(--ink); font-weight: 600; }
+  .risk-dots { display: flex; gap: 4px; flex-shrink: 0; margin-left: auto; }
+  .risk-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #ddd;
+  }
+  .risk-dot.fill-warn { background: var(--warn); }
+  .risk-dot.fill-caution { background: var(--caution); }
+
+  /* ── COMPLAINT CARDS ── */
+  .complaints { display: flex; flex-direction: column; gap: 1rem; }
+  .complaint-card {
+    border: 1px solid var(--paper-dark);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .complaint-card:hover { box-shadow: 0 4px 16px rgba(26,26,46,0.08); }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    padding: 0.875rem 1.25rem;
+    cursor: pointer;
+    user-select: none;
+  }
+  .severity-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 3px 9px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    font-weight: 500;
+  }
+  .sev-high { background: var(--warn-light); color: var(--warn); }
+  .sev-mid { background: var(--caution-light); color: var(--caution); }
+  .sev-low { background: var(--ok-light); color: var(--ok); }
+
+  .card-title { font-size: 0.95rem; font-weight: 600; flex: 1; }
+  .card-arrow {
+    font-size: 0.75rem;
+    color: #aaa;
+    transition: transform 0.25s;
+    flex-shrink: 0;
+  }
+  .complaint-card.open .card-arrow { transform: rotate(90deg); }
+
+  .card-body {
+    display: none;
+    padding: 0 1.25rem 1.25rem;
+    border-top: 1px solid var(--paper-dark);
+  }
+  .complaint-card.open .card-body { display: block; }
+
+  .card-desc {
+    font-size: 0.875rem;
+    line-height: 1.8;
+    color: #444;
+    padding-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .voices { display: flex; flex-direction: column; gap: 0.625rem; }
+  .voice {
+    background: var(--paper-dark);
+    border-left: 3px solid #ccc;
+    padding: 0.625rem 0.875rem;
+    font-size: 0.825rem;
+    line-height: 1.7;
+    color: #555;
+    border-radius: 0 4px 4px 0;
+  }
+  .voice.ptt { border-left-color: #e07b39; }
+  .voice.dcard { border-left-color: #4a90d9; }
+  .voice-src {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    color: #999;
+    letter-spacing: 0.05em;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+  }
+
+  .tip-box {
+    display: flex;
+    gap: 0.625rem;
+    background: #f0f7ff;
+    border: 1px solid #d0e4f7;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    font-size: 0.825rem;
+    line-height: 1.7;
+    color: #2c5282;
+    margin-top: 1rem;
+  }
+  .tip-icon { flex-shrink: 0; font-size: 1rem; margin-top: 1px; }
+
+  /* ── SUMMARY TABLE ── */
+  .summary-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--paper-dark);
+  }
+  .summary-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 1rem;
+  }
+  .sum-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+  .sum-table th {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #888;
+    padding: 0.5rem 0.875rem;
+    border-bottom: 1px solid var(--paper-dark);
+  }
+  .sum-table td {
+    padding: 0.75rem 0.875rem;
+    border-bottom: 1px solid var(--paper-dark);
+    vertical-align: middle;
+  }
+  .sum-table tr:last-child td { border-bottom: none; }
+  .sum-table tr:hover td { background: var(--paper-dark); }
+
+  .risk-icon { font-size: 1rem; }
+
+  /* ── GENERAL PANEL ── */
+  .gen-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  @media (max-width: 600px) { .gen-grid { grid-template-columns: 1fr; } }
+
+  .gen-card {
+    border: 1px solid var(--paper-dark);
+    border-radius: 10px;
+    padding: 1.25rem;
+  }
+  .gen-card-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .gen-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .gen-card li {
+    font-size: 0.825rem;
+    line-height: 1.6;
+    color: #444;
+    display: flex;
+    gap: 0.5rem;
+  }
+  .li-dot { flex-shrink: 0; margin-top: 4px; font-size: 0.7rem; }
+
+  /* ── MONTH TABLE ── */
+  .month-table-wrap { overflow-x: auto; margin-top: 1rem; }
+  .month-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.825rem;
+    white-space: nowrap;
+  }
+  .month-table th {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #888;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--paper-dark);
+    text-align: center;
+  }
+  .month-table th:first-child { text-align: left; }
+  .month-table td {
+    padding: 0.625rem 0.75rem;
+    border-bottom: 1px solid var(--paper-dark);
+    text-align: center;
+    color: #444;
+  }
+  .month-table td:first-child { text-align: left; font-weight: 600; color: var(--ink); }
+  .month-table tr.highlight td { background: #f0f9f4; }
+  .month-table tr:last-child td { border-bottom: none; }
+  .star { color: #f4a31c; }
+  .star-gray { color: #ddd; }
+
+  /* ── FOOTER NOTE ── */
+  .footnote {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed #ccc;
+    font-size: 0.775rem;
+    color: #999;
+    line-height: 1.7;
+    font-family: var(--mono);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-tag">Rocky 的極光跟團研究筆記 ／ 差評與地雷分析</div>
+    <h1>北歐極光跟團<br>常見差評整理</h1>
+    <div class="header-sub">冰島 · 芬蘭 · 挪威 ／ 整理自 PTT、Dcard、旅遊論壇真實心得</div>
+  </div>
+</div>
+
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab-btn ice active" onclick="switchTab('ice',this)"><span class="tab-icon">🧊</span>冰島</button>
+    <button class="tab-btn fin" onclick="switchTab('fin',this)"><span class="tab-icon">🌲</span>芬蘭</button>
+    <button class="tab-btn nor" onclick="switchTab('nor',this)"><span class="tab-icon">🏔️</span>挪威</button>
+    <button class="tab-btn gen" onclick="switchTab('gen',this)"><span class="tab-icon">📋</span>共通問題</button>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- ══════════ 冰島 ══════════ -->
+  <div class="panel active" id="panel-ice">
+    <div class="section-head">
+      <div class="section-emoji">🧊</div>
+      <div>
+        <h2>冰島極光跟團差評</h2>
+        <p>地景最豐富、但天氣最不穩定的極光目的地。看沒有的機率在三個選項裡最高，但風景本身讓大多數人不虛此行。</p>
+      </div>
+    </div>
+
+    <div class="verdict">
+      <span class="verdict-label">整體風險</span>
+      <span class="verdict-text">天氣是最大變數，極光本身靠運氣</span>
+      <div class="risk-dots">
+        <div class="risk-dot fill-warn"></div>
+        <div class="risk-dot fill-warn"></div>
+        <div class="risk-dot fill-warn"></div>
+        <div class="risk-dot fill-caution"></div>
+        <div class="risk-dot"></div>
+      </div>
+    </div>
+
+    <div class="complaints">
+
+      <div class="complaint-card open">
+        <div class="card-header" onclick="toggleCard(this)">
+          <span class="severity-tag sev-high">高風險</span>
+          <span class="card-title">天氣太善變，雲層蓋住什麼都看不到</span>
+          <span class="card-arrow">▶</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">冰島是三個目的地裡天氣最難預測的，常在幾小時內從晴轉陰。旅行社行程固定，無法像自由行一樣追著晴天跑，碰到雲層就只能乾等。極光在天上跳舞，你被雲蓋住等於白來。</p>
+          <div class="voices">
+            <div class="voice ptt">
+              <div class="voice-src">PTT・EuropeTravel</div>
+              前後兩個團都大爆發，偏偏我們這團什麼都沒看到。冰島風景是很美，但極光這件事真的太看運氣了。
+            </div>
+            <div class="voice dcard">
+              <div class="voice-src">Dcard・旅遊版</div>
+              冰島的天氣就是這樣，說變就變。導遊很盡力，但沒辦法控制老天爺，這趟算是美麗的遺憾。
+            </div>
+          </div>
+          <div class="tip-box">
+            <span class="tip-icon">💡</span>
+            <span>選行程時找「多晚在北極圈」的版本，同樣 10 天的行程，在北極圈停 6 晚 vs 2 晚成功率差距很大。</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="complaint-card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <span class="severity-tag sev-high">高風險</span>
+          <span class="card-title">道路封閉、行程臨時取消或更動</span>
+          <span class="card-arrow">▶</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">冰島冬季暴風雪頻繁，官方會發布道路關閉公告（Road.is），部分景點、道路直接封鎖。旅行社行程被迫調整是常態，事先說好的冰洞、黑沙灘有時直接取消。</p>
+          <div class="voices">
+            <div class="voice dcard">
+              <div class="voice-src">Dcard・旅遊版</div>
+              計畫去的鑽石冰沙灘那天道路封了，只能從行程上把那一站刪掉，導遊說這是冰島的「日常」。
+            </div>
+          </div>
+          <div class="tip-box">
+            <span class="tip-icon">💡</span>
+            <span>冰島跟團旅遊合約通常列明「因天候導致行程調整不退費」，簽約前要看清楚這條款。</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="complaint-card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <span class="severity-tag sev-mid">中度</span>
+          <span class="card-title">物價超高，自費花費遠超預期</span>
+          <span class="card-arrow">▶</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">冰島是全球物價最高的國家之一。跟團費用通常含部分餐食，但自由餐費用嚇人。一碗拉麵 NT$600 以上是常見價格，喝杯咖啡 NT$250 起跳。</p>
+          <div class="voices">
+            <div class="voice ptt">
+              <div class="voice-src">PTT・EuropeTravel</div>
+              預算抓得太樂觀，以為團費含大部分，結果自費餐加上買個紀念品，兩個人多花了快 3 萬台幣。
+            </div>
+          </div>
+          <div class="tip-box">
+            <span class="tip-icon">💡</span>
+            <span>出發前多準備 NT$15,000～20,000 / 人的彈性預算用於自費餐食，別用台灣物價感預估冰島消費。</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="complaint-card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <span class="severity-tag sev-mid">中度</span>
+          <span class="card-title">行程景點多但節奏趕，自由時間少</span>
+          <span class="card-arrow">▶</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">冰島可以看的地方太多，旅行社為了「物超所值」傾向塞很多景點。結果每個點停留不超過 30 分鐘，真正享受的時間反而少，夜晚追光前已經體力耗盡。</p>
+          <div class="voices">
+            <div class="voice dcard">
+              <div class="voice-src">Dcard・旅遊版</div>
+              一天跑了五個景點，每個地方匆匆拍個照就走，晚上等極光的時候人已經累了，勉強撐到凌晨 12 點實在體力不支。
+            </div>
+          </div>
+          <div class="tip-box">
+            <span class="tip-icon">💡</span>
+            <span>選行程時看「每天幾個景點」，一天超過 4 個景點的行程通常比較趕，適合體力好的旅客。</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="summary-section">
+      <div class="summary-title">冰島各項風險評分</div>
+      <table class="sum-table">
+        <thead><tr><th>差評類型</th><th>嚴重度</th><th>發生機率</th><th>能否避免</th></tr></thead>
+        <tbody>
+          <tr><td>天氣不穩定看不到極光</td><td>🔴 高</td><td>🔴 高</td><td>❌ 無法控制</td></tr>
+          <tr><td>道路封閉行程取消</td><td>🔴 高</td><td>🟡 中</td><td>⚠️ 選對季節可降低</td></tr>
+          <tr><td>物價超出預算</td><td>🟡 中</td><td>🔴 高</td><td>✅ 事先準備彈性預算</td></tr>
+          <tr><td>行程節奏太趕</td><td>🟡 中</td><td>🟡 中</td><td>✅ 選深度少景點行程</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══════════ 芬蘭 ══════════ -->
+  <div class="panel" id="panel-fin">
+    <div class="section-head">
+      <div class="section-emoji">🌲</div>
+      <div>
+        <h2>芬蘭極光跟團差評</h2>
+        <p>行銷最成功的極光目的地，玻璃屋夢幻形象深入人心。但「宣傳」與「實際」的落差也是三個目的地裡最常被提起的。</p>
+      </div>
+    </div>
+
+    <div class="verdict">
+      <span class="verdict-label">整體風險</span>
+      <span class="verdict-text">住宿期望落差最常見，需要仔細確認合約</span>
+      <div class="risk-dots">
+        <div class="risk-dot fill-caution"></div>
+        <div class="risk-dot fill-caution"></div>
+        <div class="risk-dot fill-caution"></div>
+        <div class="risk-dot"></div>
+        <div class="risk-dot"></div>
+      </div>
+    </div>
+
+    <div class="complaints">
+
+      <div class="complaint-card open">
+        <div class="card-header" onclick="toggleCard(this)">
+          <span class="severity-tag sev-high">高風險</span>
+          <span class="card-title">玻璃屋「或同級」暗藏陷阱，實際住宿打折扣</span>
+          <span class="card-arrow">▶</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">這是芬蘭極光團最大宗的差評來源。行程頁面秀出夢幻玻璃屋照片，但合約上寫的是「玻璃屋或同級住宿」，旅行社未事先付訂金的情況下，旺季往往訂不到，最後改住普通木屋或一般飯店。</p>
+          <div class="voices">
+            <div class="voice dcard">
+              <div class="voice-src">Dcard・旅遊版</div>
+              整個行程最期待就是玻璃屋那晚，結果到了才知道改住旁邊的木屋。導遊說玻璃屋被包團，「同級」這兩個字讓我很崩潰。
+            </div>
+            <div class="voice ptt">
+              <div class="voice-src">PTT・EuropeTravel</div>
+              網頁上的照片跟實際住的差很多，問了才知道照片是示意。旅行社說已經是同等級，但我覺得完全不一樣。
+            </div>
+          </div>
+          <div class="tip-box">
+            <span class="tip-icon">💡</span>
+            <span>報名前直接問：「玻璃屋是保證入住還是可能更換？」要對方白紙黑字寫進合約。選標榜「保證入住」的行程，雖然通常貴 NT$1～2 萬，但心安很多。</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="complaint-card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <span class="severity-tag sev-high">高風險</span>
+          <span class="card-title">玻璃屋衛浴不獨立、保暖條件不如預期</span>
+          <span class="card-arrow">▶</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">就算順利住進玻璃屋，實際體驗也常讓人意外。許多玻璃屋的衛浴是幾間共用（不是套房），半夜零下 15 度要穿好衣服跑去廁所。玻璃天花板雖然浪漫，但保暖效果比一般房間差。</p>
+          <div class="voices">
+            <div class="voice dcard">
+              <div class="voice-src">Dcard・旅遊版</div>
+              以為是套房，結果廁所要走到外面共用，半夜極光出現想上廁所超痛苦。玻璃屋的暖氣其實不夠力，睡袋要自己帶。
+            </div>
+          </div>
+          <div class="tip-box">
+            <span class="tip-icon">💡</span>
+            <span>訂房前確認是否為「獨立衛浴玻璃屋」。加利利的臻選系列和晴天部分行程有獨立衛浴選項，但價格較高。</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="complaint-card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <span class="severity-tag sev-mid">中度</span>
+          <span class="card-title">夜臥火車難睡，隔天體力耗盡</span>
+          <span class="card-arrow">▶</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">很多芬蘭行程包含夜臥火車（赫爾辛基→拉普蘭，約 12 小時）。行銷文案叫做「星空列車」，但實際是四六人共艙的臥鋪，噪音大、床窄、不習慣的人幾乎睡不著，隔天就要開始高強度行程。</p>
+          <div class="voices">
+            <div class="voice dcard">
+              <div class="voice-src">Dcard・旅遊版</div>
+              火車真的很吵，整夜幾乎沒睡，一下車就要去雪地活動，整個行程最累的那天就是夜臥火車之後。
+            </div>
+            <div class="voice ptt">
+              <div class="voice-src">PTT・EuropeTravel</div>
+              北歐食物就那樣不用期待太高，夜臥火車也是睡眠品質大考驗。整體推薦，但這兩點要有心理準備。
+            </div>
+          </div>
+          <div class="tip-box">
+            <span class="tip-icon">💡</span>
+            <span>如果睡眠品質對你很重要，選「飛機直達拉普蘭」的行程版本，不含夜臥火車。晴天和加利利部分行程有此選項，但價格會高一些。</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="complaint-card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <span class="severity-tag sev-mid">中度</span>
+          <span class="card-title">拉普蘭雲層多，實際停留天數比預期看光機會少</span>
+          <span class="card-arrow">▶</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">芬蘭拉普蘭是內陸地區，冬季雲層覆蓋率比挪威特羅姆瑟高。一個 10 天的行程，真正在北極圈的時間可能只有 4～5 晚，加上雲層干擾，真正有機會看光的晚上可能更少。</p>
+          <div class="voices">
+            <div class="voice dcard">
+              <div class="voice-src">Dcard・旅遊版</div>
+              行程說北歐 10 天，扣掉前後在大城市的時間，真正在極光區只有 4 晚，其中 2 晚陰天。倒數字一算有點傷心。
+            </div>
+          </div>
+          <div class="tip-box">
+            <span class="tip-icon">💡</span>
+            <span>選行程時注意「幾晚在北極圈 / 拉普蘭」，而不是看總天數。標榜「5 晚以上」的行程成功率相對較高。</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="complaint-card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <span class="severity-tag sev-low">輕度</span>
+          <span class="card-title">聖誕老人村商業化、和想像落差大</span>
+          <span class="card-arrow">▶</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">聖誕老人村是芬蘭極光行程的標配景點，但實際上是高度商業化的觀光區，門票、合照、各種活動全部要另外付費，感覺像主題樂園。部分旅客覺得和想像中的童話感有落差。</p>
+          <div class="voices">
+            <div class="voice dcard">
+              <div class="voice-src">Dcard・旅遊版</div>
+              聖誕老人村其實就是個收費景點，跟聖誕老人拍照要另外付錢，整個地方就是做觀光客生意。還是很好玩，但期望不要太高。
+            </div>
+          </div>
+          <div class="tip-box">
+            <span class="tip-icon">💡</span>
+            <span>把聖誕老人村當作「有趣的體驗」而非「神聖朝聖地」，這樣現場感受反而會更好。</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="summary-section">
+      <div class="summary-title">芬蘭各項風險評分</div>
+      <table class="sum-table">
+        <thead><tr><th>差評類型</th><th>嚴重度</th><th>發生機率</th><th>能否避免</th></tr></thead>
+        <tbody>
+          <tr><td>玻璃屋宣傳與實際落差</td><td>🔴 高</td><td>🟡 中</td><td>✅ 事前確認合約可避免</td></tr>
+          <tr><td>玻璃屋設施不如預期</td><td>🟡 中</td><td>🟡 中</td><td>✅ 選獨立衛浴款式</td></tr>
+          <tr><td>夜臥火車睡眠品質差</td><td>🟡 中</td><td>🔴 高</td><td>✅ 選飛機版行程</td></tr>
+          <tr><td>雲層遮蔽看不到極光</td><td>🟡 中</td><td>🟡 中</td><td>⚠️ 選多晚停留可降低風險</td></tr>
+          <tr><td>聖誕老人村落差</td><td>🟢 低</td><td>🟡 中</td><td>✅ 調整期望即可</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══════════ 挪威 ══════════ -->
+  <div class="panel" id="panel-nor">
+    <div class="section-head">
+      <div class="section-emoji">🏔️</div>
+      <div>
+        <h2>挪威極光跟團差評</h2>
+        <p>晴天機率最高、景觀最壯闊的選擇，但交通轉乘複雜，1 月航班風險是最大痛點。</p>
+      </div>
+    </div>
+
+    <div class="verdict">
+      <span class="verdict-label">整體風險</span>
+      <span class="verdict-text">1 月航班停飛風險最高，選 2 月出發最穩</span>
+      <div class="risk-dots">
+        <div class="risk-dot fill-caution"></div>
+        <div class="risk-dot fill-caution"></div>
+        <div class="risk-dot"></div>
+        <div class="risk-dot"></div>
+        <div class="risk-dot"></div>
+      </div>
+    </div>
+
+    <div class="complaints">
+
+      <div class="complaint-card open">
+        <div class="card-header" onclick="toggleCard(this)">
+          <span class="severity-tag sev-high">高風險</span>
+          <span class="card-title">1 月暴風雪頻繁，航班停飛、行程全取消</span>
+          <span class="card-arrow">▶</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">挪威北部尤其是特羅姆瑟，1 月氣候最惡劣，暴風雪可能持續數天，導致班機停飛、極光活動全取消，旅客只能困在飯店。這是挪威差評裡最嚴重、也最有可能發生的狀況。</p>
+          <div class="voices">
+            <div class="voice dcard">
+              <div class="voice-src">Dcard・旅遊版</div>
+              出發前看到一堆人在抱怨一月天氣太惡劣，暴風雨導致班機全部停飛，行程全都被取消只能窩在飯店。幸好我們二月去天氣還算穩定，最後也順利追到極光。
+            </div>
+          </div>
+          <div class="tip-box">
+            <span class="tip-icon">💡</span>
+            <span>把出發時間從 1 月換成 2 月，幾乎可以大幅降低此風險。極光活躍度差不多，但氣候穩定很多。</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="complaint-card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <span class="severity-tag sev-mid">中度</span>
+          <span class="card-title">轉機次數多、行李遺失風險高</span>
+          <span class="card-arrow">▶</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">台北到挪威北部（特羅姆瑟或羅弗敦）至少需要 2 次轉機。轉機多的情況下行李延誤或遺失的機率明顯增加，而到了北極圈才發現保暖衣物不見是非常糟糕的狀況。</p>
+          <div class="voices">
+            <div class="voice ptt">
+              <div class="voice-src">PTT・EuropeTravel</div>
+              行李在奧斯陸就沒跟上來，到特羅姆瑟等了一天半才拿到。那一天我只有隨身包包，北極圈的冬天沒有保暖衣物真的很可怕。
+            </div>
+          </div>
+          <div class="tip-box">
+            <span class="tip-icon">💡</span>
+            <span>隨身行李一定要帶一套保暖內層衣物。羽絨衣可以壓縮放隨身包，這趟旅程最重要的備品。</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="complaint-card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <span class="severity-tag sev-mid">中度</span>
+          <span class="card-title">極光遊船費用高，偶因海況取消</span>
+          <span class="card-arrow">▶</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">挪威行程常包含「極光遊船」，是特色體驗之一，但費用通常是自費項目，價格不低（約 NT$3,000～6,000 / 人）。海況不佳時遊船取消，退費條款需事先確認。</p>
+          <div class="voices">
+            <div class="voice dcard">
+              <div class="voice-src">Dcard・旅遊版</div>
+              極光遊船那晚風浪太大直接取消，旅行社說這是不可抗力不退費，但我們是自費項目啊，覺得很不合理。
+            </div>
+          </div>
+          <div class="tip-box">
+            <span class="tip-icon">💡</span>
+            <span>報名前確認遊船取消時的退費政策，最好選「取消當天全額退款」或「免費改期」條款的業者。</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="complaint-card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <span class="severity-tag sev-low">輕度</span>
+          <span class="card-title">極夜期間日照不到 3 小時，部分旅客情緒低落</span>
+          <span class="card-arrow">▶</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">12 月到 1 月在北極圈內，白天幾乎只有 2～3 小時的微弱光線，其餘全是黑夜。對部分旅客來說這很震撼甚至有些壓抑，身體時鐘容易混亂，情緒可能受影響。</p>
+          <div class="voices">
+            <div class="voice dcard">
+              <div class="voice-src">Dcard・旅遊版</div>
+              早上 10 點才有一點點光，下午 2 點就天黑了，連續幾天有點說不上來的壓抑感，建議做好心理準備。
+            </div>
+          </div>
+          <div class="tip-box">
+            <span class="tip-icon">💡</span>
+            <span>對怕黑或不習慣的旅客，可考慮 2 月底或 3 月出發，白天時間慢慢拉長，心理壓力會少很多。</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="summary-section">
+      <div class="summary-title">挪威各項風險評分</div>
+      <table class="sum-table">
+        <thead><tr><th>差評類型</th><th>嚴重度</th><th>發生機率</th><th>能否避免</th></tr></thead>
+        <tbody>
+          <tr><td>1 月暴風停飛行程取消</td><td>🔴 高</td><td>🟡 中（1 月高、2 月低）</td><td>✅ 選 2 月出發大幅降低</td></tr>
+          <tr><td>轉機行李遺失</td><td>🟡 中</td><td>🟡 中</td><td>✅ 隨身帶備用保暖衣</td></tr>
+          <tr><td>極光遊船取消不退費</td><td>🟡 中</td><td>🟢 低</td><td>✅ 確認退費條款</td></tr>
+          <tr><td>極夜影響情緒</td><td>🟢 低</td><td>🟡 中</td><td>✅ 選 2～3 月或心理建設</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══════════ 共通問題 ══════════ -->
+  <div class="panel" id="panel-gen">
+    <div class="section-head">
+      <div class="section-emoji">📋</div>
+      <div>
+        <h2>三國共通差評與陷阱</h2>
+        <p>不管選哪個目的地，北歐極光跟團都有這些共同問題。出發前看清楚，比選哪個國家更重要。</p>
+      </div>
+    </div>
+
+    <div class="gen-grid">
+      <div class="gen-card">
+        <div class="gen-card-title">⚠️ 「極光保證」文字遊戲</div>
+        <ul>
+          <li><span class="li-dot">▸</span>「Kp 值達 3 即算有效出團」，但 Kp 值高不代表你看得到，雲層厚一樣白費</li>
+          <li><span class="li-dot">▸</span>保證出「追光行動」≠ 保證「看到極光」，兩件事要分清楚</li>
+          <li><span class="li-dot">▸</span>退費條款通常寫「自然因素不退款」，看不到幾乎不賠</li>
+        </ul>
+      </div>
+      <div class="gen-card">
+        <div class="gen-card-title">⚠️ 心動價 vs. 真實費用</div>
+        <ul>
+          <li><span class="li-dot">▸</span>部分旅行社官網放低於行情的起價，小費、燃油稅、簽證費加下去才是真實費用</li>
+          <li><span class="li-dot">▸</span>領隊小費每天約 EUR 10～15 / 人，10 天行程額外 NT$3,000～5,000</li>
+          <li><span class="li-dot">▸</span>建議拿 3 家旅行社的「總費用含稅含小費」來比，不要只看起價</li>
+        </ul>
+      </div>
+      <div class="gen-card">
+        <div class="gen-card-title">⚠️ 北歐餐食普遍難吃</div>
+        <ul>
+          <li><span class="li-dot">▸</span>北歐料理偏淡、偏簡單，台灣人普遍覺得「沒什麼味道」</li>
+          <li><span class="li-dot">▸</span>跟團餐食通常是飯店自助餐，重複性高</li>
+          <li><span class="li-dot">▸</span>建議帶一些台灣的泡麵、肉乾、辣椒醬當備糧</li>
+        </ul>
+      </div>
+      <div class="gen-card">
+        <div class="gen-card-title">⚠️ 極光出現時間難配合</div>
+        <ul>
+          <li><span class="li-dot">▸</span>極光高峰通常在晚上 10 點～凌晨 2 點，需要長時間在戶外等待</li>
+          <li><span class="li-dot">▸</span>氣溫零下 15～25 度等極光，體力和保暖裝備要夠</li>
+          <li><span class="li-dot">▸</span>跟團行程第二天還是要正常出發，隔天體力透支很常見</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top:1.5rem">
+      <div class="summary-title">各月份綜合比較（以看到極光為目標）</div>
+      <div class="month-table-wrap">
+        <table class="month-table">
+          <thead>
+            <tr>
+              <th>月份</th>
+              <th>極光活躍</th>
+              <th>夜晚長度</th>
+              <th>雲層多寡</th>
+              <th>氣溫</th>
+              <th>票價</th>
+              <th>推薦度</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>9 月</td>
+              <td>⭐⭐⭐</td>
+              <td>短</td>
+              <td>少</td>
+              <td>涼爽</td>
+              <td>便宜</td>
+              <td>⭐⭐⭐</td>
+            </tr>
+            <tr>
+              <td>10 月</td>
+              <td>⭐⭐⭐⭐</td>
+              <td>中</td>
+              <td>中</td>
+              <td>冷</td>
+              <td>中</td>
+              <td>⭐⭐⭐</td>
+            </tr>
+            <tr>
+              <td>11 月</td>
+              <td>⭐⭐⭐⭐</td>
+              <td>長</td>
+              <td>最多</td>
+              <td>很冷</td>
+              <td>最便宜</td>
+              <td>⭐⭐⭐</td>
+            </tr>
+            <tr class="highlight">
+              <td>12 月 ★</td>
+              <td>⭐⭐⭐⭐⭐</td>
+              <td>最長</td>
+              <td>少</td>
+              <td>極冷</td>
+              <td>貴（聖誕）</td>
+              <td>⭐⭐⭐⭐⭐</td>
+            </tr>
+            <tr class="highlight">
+              <td>1 月 ★</td>
+              <td>⭐⭐⭐⭐⭐</td>
+              <td>很長</td>
+              <td>少</td>
+              <td>最冷</td>
+              <td>貴（寒假）</td>
+              <td>⭐⭐⭐⭐⭐</td>
+            </tr>
+            <tr class="highlight">
+              <td>2 月 ★推薦</td>
+              <td>⭐⭐⭐⭐⭐</td>
+              <td>很長</td>
+              <td>少</td>
+              <td>極冷</td>
+              <td>中</td>
+              <td>⭐⭐⭐⭐⭐</td>
+            </tr>
+            <tr>
+              <td>3 月</td>
+              <td>⭐⭐⭐⭐</td>
+              <td>中</td>
+              <td>少</td>
+              <td>回暖</td>
+              <td>便宜</td>
+              <td>⭐⭐⭐⭐</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="complaints" style="margin-top:2rem">
+      <div class="complaint-card open">
+        <div class="card-header" onclick="toggleCard(this)">
+          <span class="severity-tag sev-high">最重要</span>
+          <span class="card-title">報名前一定要問旅行社的 5 個問題</span>
+          <span class="card-arrow">▶</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">根據各平台差評整理，這 5 個問題是決定踩不踩雷的關鍵，建議在報名前直接問清楚：</p>
+          <div class="voices">
+            <div class="voice">
+              <div class="voice-src">問題 1</div>
+              「玻璃屋 / 極光屋是保證入住，還是可能換同級住宿？」→ 要求白紙黑字
+            </div>
+            <div class="voice">
+              <div class="voice-src">問題 2</div>
+              「行程在北極圈 / 極光帶停留幾晚？」→ 5 晚以上才算足夠
+            </div>
+            <div class="voice">
+              <div class="voice-src">問題 3</div>
+              「看不到極光有什麼補救或退費方案？」→ 了解心理底線
+            </div>
+            <div class="voice">
+              <div class="voice-src">問題 4</div>
+              「團費是否含領隊小費、燃油稅、機場稅？」→ 確認真實總費用
+            </div>
+            <div class="voice">
+              <div class="voice-src">問題 5</div>
+              「行程中有沒有夜臥火車？」→ 可以要求改飛機版本
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footnote">
+    整理來源：PTT EuropeTravel 板、Dcard 旅遊版、各旅遊部落格 2022～2026 年心得文 ／ 僅供參考，實際情況依旅行社與出發日期而異。
+  </div>
+
+</div>
+
+<script>
+  function switchTab(id, btn) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  function toggleCard(header) {
+    const card = header.closest('.complaint-card');
+    card.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
